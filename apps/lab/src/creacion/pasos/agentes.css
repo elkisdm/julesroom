@@ -1,0 +1,183 @@
+.fl-agentes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none !important;
+}
+.fl-agentes-panel {
+  --fl-ancho: 350px;
+  pointer-events: auto;
+  right: 24px;
+  bottom: 24px;
+  width: var(--fl-ancho);
+}
+.fl-agentes-panel h2 {
+  font-size: 32px;
+}
+.fl-plegar {
+  display: none;
+}
+.fl-seleccion {
+  display: flex;
+  gap: 16px;
+  padding: 18px 0 10px;
+}
+.fl-seleccion button {
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  color: var(--suave);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  min-height: 36px;
+}
+.fl-agentes-lista {
+  display: grid;
+  gap: 6px;
+}
+.fl-agentes-lista button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: transparent;
+  text-align: left;
+}
+.fl-agentes-lista button[aria-pressed='true'] {
+  background: var(--texto);
+  color: var(--tinta);
+  font-weight: 600;
+}
+.fl-agentes-lista b,
+.fl-agentes-lista small {
+  display: block;
+}
+.fl-agentes-lista small {
+  font-size: 12px;
+  font-weight: 400;
+}
+.fl-agentes-panel footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+.fl-agentes-panel footer > span {
+  color: var(--suave);
+}
+.fl-agentes-nota {
+  display: block;
+  color: var(--suave);
+  font-size: 11px;
+  margin-top: 14px;
+}
+.fl-agente-etiqueta {
+  transform: translate(-50%, calc(-100% - 38px));
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: var(--vidrio);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  white-space: nowrap;
+}
+.fl-agente-etiqueta b {
+  display: block;
+  font-size: 15px;
+}
+.fl-agente-etiqueta span {
+  display: block;
+  font-size: 11px;
+  color: var(--suave);
+}
+.fl-agente-etiqueta[aria-pressed='true'] {
+  background: var(--texto);
+  color: var(--tinta);
+}
+.fl-agente-etiqueta[aria-pressed='true'] span {
+  color: inherit;
+}
+@media (max-width: 720px) {
+  .fl-agentes-panel {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+  }
+  .fl-agentes-panel header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .fl-agentes-panel h2 {
+    font-size: 26px;
+  }
+  .fl-agentes-panel p {
+    font-size: 12px;
+  }
+  .fl-plegar {
+    display: block;
+    flex: none;
+    background: transparent;
+    border: 0;
+    min-height: 44px;
+    padding: 4px;
+    font-size: 12px !important;
+    color: var(--laton2) !important;
+  }
+  .fl-agentes-panel[data-abierta='false'] .fl-agentes-detalle {
+    display: none;
+  }
+  .fl-agentes-panel[data-abierta='true'] .fl-agentes-detalle {
+    display: block;
+  }
+  .fl-agentes-panel footer {
+    margin-top: 12px;
+  }
+  .fl-agentes-nota {
+    margin-top: 10px;
+  }
+  .fl-agente-etiqueta {
+    padding: 4px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .fl-agente-etiqueta span {
+    display: none;
+  }
+  .fl-agentes-lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .fl-agentes-lista button {
+    padding: 8px;
+    gap: 4px;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 76px;
+  }
+  .fl-agentes-lista small {
+    font-size: 11px;
+  }
+  .fl-agentes-lista button > span:last-child {
+    text-align: right;
+  }
+  .fl-seleccion {
+    padding: 4px 0;
+  }
+  .fl-agente-etiqueta b {
+    font-size: 12px;
+  }
+  .fl-agente-etiqueta span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 720px) {
+  .cr--agentes .cr-escena {
+    bottom: var(--fl-hoja-agentes);
+  }
+}

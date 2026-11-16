@@ -1,0 +1,9 @@
+.ev-llave-demo input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  background: var(--vidrio2);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+}

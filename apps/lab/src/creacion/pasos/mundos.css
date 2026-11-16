@@ -1,0 +1,295 @@
+/* Parámetros de composición; identidad y controles vienen de crear.css. */
+.cr-mundos {
+  --borde-mundos: 32px;
+  --miniatura-mundos: 82px;
+  --espacio-mundos: 16px;
+  --radio-mundos: 12px;
+  --entrada-mundos: 400ms;
+  position: absolute;
+  inset: 0;
+  pointer-events: none !important;
+}
+.cr-mundos button {
+  pointer-events: auto;
+}
+.cr--sala {
+  --alto-pie-mundos: 264px;
+}
+.cr--sala .cr-escena {
+  bottom: var(--alto-pie-mundos);
+}
+.cr--sala .cr-riel {
+  display: none;
+}
+.cr--sala .cr-esquina-sup {
+  top: 26px;
+  right: 32px;
+}
+.cr-mundos-navegar {
+  position: absolute;
+  left: var(--borde-mundos);
+  right: var(--borde-mundos);
+  bottom: calc(var(--alto-pie-mundos) + 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cr-mundos-navegar .cr-boton {
+  background: var(--vidrio);
+  padding: 10px 16px;
+  font-size: 22px;
+}
+.cr-mundos-navegar > span {
+  font-size: 12px;
+  color: var(--suave);
+  background: var(--vidrio);
+  border-radius: var(--radio-mundos);
+  padding: 8px 12px;
+}
+.cr-mundos-pie {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--alto-pie-mundos);
+  padding: 24px var(--borde-mundos);
+  display: grid;
+  grid-template-columns: 1fr minmax(420px, 0.9fr);
+  align-items: center;
+  gap: 32px;
+  border-top: 1px solid var(--linea);
+  background: var(--tinta);
+  pointer-events: auto;
+}
+.cr-mundos-descripcion {
+  animation: cr-entra var(--entrada-mundos) var(--curva);
+}
+.cr-mundos-descripcion h2 {
+  font: 800 clamp(32px, 3.5vw, 52px)/1 var(--display);
+  letter-spacing: -0.03em;
+}
+.cr-mundos-descripcion p {
+  color: var(--suave);
+  margin-top: 12px;
+  max-width: 36em;
+}
+.cr-mundos-datos {
+  display: flex;
+  gap: 24px;
+  margin-top: 22px;
+  color: var(--suave);
+  font-size: 13px;
+}
+.cr-mundos-datos b {
+  color: var(--texto);
+  font: 700 22px var(--display);
+  margin-right: 3px;
+}
+.cr-mundos-eleccion {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+.cr-mundos-estilos {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--suave);
+}
+.cr-mundos-estilos b {
+  color: var(--texto);
+  margin-left: 6px;
+  font-weight: 500;
+}
+.cr-mundos-estilos > div {
+  display: flex;
+  gap: 8px;
+}
+.cr-mundos-miniaturas {
+  grid-column: 1/-1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+.cr-mundos-miniaturas button {
+  min-width: 0;
+  padding: 0;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-mundos);
+  overflow: hidden;
+  text-align: left;
+  transition:
+    transform 180ms var(--curva),
+    background 180ms var(--curva);
+}
+.cr-mundos-miniaturas img {
+  width: 100%;
+  height: var(--miniatura-mundos);
+  object-fit: cover;
+  display: block;
+}
+.cr-mundos-miniaturas button > span:last-child {
+  display: block;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--suave);
+}
+.cr-mundos-miniaturas button[aria-pressed='true'] {
+  background: var(--laton);
+  border-color: var(--laton);
+  transform: translateY(-3px);
+}
+.cr-mundos-miniaturas button[aria-pressed='true'] > span:last-child {
+  color: var(--tinta);
+  font-weight: 700;
+}
+.cr-mundos-confirmar {
+  grid-column: 1/-1;
+  justify-content: center;
+  justify-self: end;
+  padding: 10px 20px;
+}
+.cr-mundos-aviso {
+  grid-column: 1/-1;
+  color: var(--aviso);
+  font-size: 12px;
+}
+.cr-carga-real {
+  width: 120px;
+  height: 3px;
+  background: var(--linea);
+  overflow: hidden;
+  border-radius: 3px;
+}
+.cr-carga-real i {
+  display: block;
+  height: 100%;
+  background: var(--laton);
+  transition: width 250ms var(--curva);
+}
+@media (max-width: 720px) {
+  .cr-mundos {
+    --borde-mundos: 16px;
+    --miniatura-mundos: 54px;
+    --espacio-mundos: 12px;
+  }
+  .cr--sala {
+    --alto-pie-mundos: 292px;
+  }
+  .cr--sala .cr-esquina-sup {
+    top: 16px;
+    right: 16px;
+  }
+  .cr-mundos-navegar {
+    bottom: calc(var(--alto-pie-mundos) + 12px);
+  }
+  .cr-mundos-navegar > span {
+    font-size: 10px;
+    padding: 6px;
+  }
+  .cr-mundos-navegar .cr-boton {
+    font-size: 18px;
+    padding: 8px 13px;
+  }
+  .cr-mundos-pie {
+    padding: 14px var(--borde-mundos);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .cr-mundos-descripcion h2 {
+    font-size: 30px;
+  }
+  .cr-mundos-descripcion p {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+  .cr-mundos-datos {
+    margin-top: 8px;
+    gap: 18px;
+    font-size: 11px;
+  }
+  .cr-mundos-datos b {
+    font-size: 17px;
+  }
+  .cr-mundos-eleccion {
+    gap: 9px;
+  }
+  .cr-mundos-miniaturas {
+    gap: 8px;
+  }
+  .cr-mundos-miniaturas button > span:last-child {
+    padding: 5px 6px;
+    font-size: 10px;
+  }
+  .cr-mundos-estilos {
+    font-size: 11px;
+    gap: 4px;
+  }
+  .cr-mundos-estilos b {
+    margin-left: 3px;
+  }
+  .cr-mundos-estilos > div {
+    gap: 6px;
+  }
+  .cr-mundos-muestra {
+    width: 34px;
+    height: 26px;
+  }
+  .cr-mundos-confirmar {
+    justify-self: stretch;
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+  .cr-mundos-aviso {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr-mundos *,
+  .cr-carga-real i {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* El aviso reserva su propia fila, también cuando el texto necesita dos líneas. */
+.cr--sala:has(.cr-mundos-aviso) {
+  --alto-pie-mundos: 300px;
+}
+@media (max-width: 720px) {
+  .cr--sala:has(.cr-mundos-aviso) {
+    --alto-pie-mundos: 328px;
+  }
+}
+
+/* La selección responde antes de construir: el último cuadro nunca queda vacío. */
+.cr-mundos-marcador {
+  position: absolute;
+  inset: 0 0 var(--alto-pie-mundos);
+  background: var(--tinta);
+  opacity: 1;
+  pointer-events: none;
+}
+.cr-mundos-marcador img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.cr-mundos-marcador--listo {
+  opacity: 0;
+  transition: opacity var(--fundido-mundos) var(--curva);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr-mundos-marcador--listo {
+    transition: none;
+  }
+}

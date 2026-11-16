@@ -1,0 +1,7 @@
+{
+  "redirects": [{ "source": "/crear.html", "destination": "/", "permanent": false }],
+  "rewrites": [{ "source": "/", "destination": "/crear.html" }],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ]
+}

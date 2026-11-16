@@ -1,0 +1,36 @@
+{
+  "name": "julesroom",
+  "version": "0.0.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.0.0",
+  "prettier": "@devground/prettier-config",
+  "scripts": {
+    "test": "pnpm -r --if-present test",
+    "test:coverage": "pnpm -r --if-present test:coverage",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "prepare": "husky",
+    "dev:sala": "node scripts/dev-sala.mjs"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.4",
+    "@devground/agents-md": "^2.0.0",
+    "@devground/architecture-guide": "^2.0.0",
+    "@devground/commitlint-config": "^2.0.0",
+    "@devground/eslint-config": "^2.0.0",
+    "@devground/husky-config": "^2.0.1",
+    "@devground/lint-staged-config": "^2.0.0",
+    "@devground/prettier-config": "^2.0.0",
+    "@devground/tsconfig": "^3.0.0",
+    "@devground/vitest-config": "^2.0.0",
+    "@vitest/coverage-v8": "^5.1.0",
+    "eslint": "^9.39.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  }
+}

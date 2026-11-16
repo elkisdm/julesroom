@@ -1,0 +1,504 @@
+:root {
+  --fondo: #0c1018;
+  --vidrio: rgb(13 18 28 / 0.82);
+  --vidrio-fuerte: rgb(15 20 31 / 0.94);
+  --borde: rgb(255 255 255 / 0.16);
+  --texto: #eef2f8;
+  --suave: #b4bece;
+  --acento: #8dbbff;
+  --acento-fondo: rgb(141 187 255 / 0.2);
+  --foco: #ffd27a;
+  --radio: 14px;
+  --mov: 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --alto-control: 44px;
+  --teclado: 0px;
+  --seguro: env(safe-area-inset-bottom, 0px);
+}
+html,
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font:
+    15px/1.45 system-ui,
+    sans-serif;
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}
+.sala {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+.sala-escena {
+  position: absolute;
+  inset: 0;
+}
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+kbd {
+  font: inherit;
+  padding: 0 5px;
+  border: 1px solid var(--borde);
+  border-radius: 5px;
+  color: var(--texto);
+}
+
+/* Ayuda arriba a la izquierda */
+.ayuda {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  max-width: min(340px, calc(100vw - 24px));
+  padding: 8px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: var(--vidrio);
+  backdrop-filter: blur(10px);
+  color: var(--suave);
+  font-size: 12.5px;
+  pointer-events: none;
+}
+.ayuda h1 {
+  margin: 0 0 2px;
+  color: var(--texto);
+  font-size: 14px;
+  font-weight: 650;
+}
+.ayuda p {
+  margin: 2px 0 0;
+}
+
+/* Recuadro de desarrollo: presencia */
+.presencia {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
+  max-width: min(300px, calc(100vw - 24px));
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: var(--vidrio);
+  backdrop-filter: blur(10px);
+  color: var(--suave);
+  font-size: 12.5px;
+}
+.presencia summary {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.presencia pre {
+  margin: 0;
+  padding: 0 12px 10px;
+  overflow: auto;
+  color: var(--texto);
+  font:
+    12px/1.5 ui-monospace,
+    monospace;
+}
+
+/* Aviso «E · hablar con …» */
+.aviso {
+  position: absolute;
+  left: 50%;
+  bottom: calc(76px + var(--seguro) + var(--teclado));
+  z-index: 7;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 16px 0 10px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--vidrio-fuerte);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  animation: aviso-entra var(--mov) both;
+}
+.aviso kbd {
+  min-width: 24px;
+  padding: 1px 6px;
+  text-align: center;
+  font-weight: 600;
+  border-color: var(--foco);
+  color: var(--foco);
+}
+.aviso-objeto {
+  font-weight: 600;
+}
+@keyframes aviso-entra {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+}
+
+/* Burbuja anclada al agente */
+.burbuja {
+  --cola: 50%;
+  --angulo: 0rad;
+  --alto-max: 320px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(360px, calc(100vw - 32px));
+  max-height: var(--alto-max);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--vidrio-fuerte);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 36px rgb(0 0 0 / 0.45);
+}
+.burbuja-cabeza {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 6px 14px;
+}
+.burbuja-flecha {
+  display: none;
+  flex: none;
+  color: var(--acento);
+  transform: rotate(var(--angulo));
+}
+.burbuja[data-lado='borde'] .burbuja-flecha {
+  display: block;
+}
+.burbuja-quien {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.burbuja-quien strong {
+  font-size: 15px;
+}
+.burbuja-quien span {
+  overflow: hidden;
+  color: var(--suave);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.boton-icono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+.boton-icono:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+.burbuja-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 6px 14px 12px;
+  overscroll-behavior: contain;
+  -webkit-mask-image: linear-gradient(
+    transparent 0,
+    #000 6px,
+    #000 calc(100% - 14px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(transparent 0, #000 6px, #000 calc(100% - 14px), transparent 100%);
+}
+.turno {
+  margin-bottom: 10px;
+}
+.turno p {
+  margin: 0;
+}
+.turno-tu {
+  color: var(--suave);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.turno-agente {
+  margin-top: 4px;
+  font-size: 15.5px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.turno-saludo {
+  margin-top: 0;
+}
+.turno-nota {
+  margin-top: 4px;
+  color: var(--suave);
+  font-size: 13px;
+}
+.turno-error {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.07);
+  color: var(--texto);
+  font-size: 14.5px;
+  overflow-wrap: anywhere;
+}
+.turno-pensando {
+  margin: 0;
+  color: var(--suave);
+  font-size: 14px;
+  animation: pulso 1.6s ease-in-out infinite;
+}
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--acento);
+}
+.burbuja-mas,
+.boton-secundario {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+.burbuja-mas {
+  margin-bottom: 8px;
+  color: var(--suave);
+  font-size: 13px;
+}
+.burbuja-mas:hover,
+.boton-secundario:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+@keyframes pulso {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Cola de la burbuja: un rombo con borde solo hacia afuera */
+.burbuja-cola {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--vidrio-fuerte);
+  border: 0 solid var(--borde);
+}
+.burbuja[data-lado='arriba'] .burbuja-cola,
+.burbuja[data-lado='tope'] .burbuja-cola {
+  left: var(--cola);
+  bottom: -7px;
+  margin-left: -6px;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+.burbuja[data-lado='abajo'] .burbuja-cola {
+  left: var(--cola);
+  top: -7px;
+  margin-left: -6px;
+  border-width: 1px 0 0 1px;
+  transform: rotate(45deg);
+}
+.burbuja[data-lado='derecha'] .burbuja-cola {
+  top: var(--cola);
+  left: -7px;
+  margin-top: -6px;
+  border-width: 0 0 1px 1px;
+  transform: rotate(45deg);
+}
+.burbuja[data-lado='izquierda'] .burbuja-cola {
+  top: var(--cola);
+  right: -7px;
+  margin-top: -6px;
+  border-width: 1px 1px 0 0;
+  transform: rotate(45deg);
+}
+.burbuja[data-lado='borde'] .burbuja-cola {
+  display: none;
+}
+
+/* Marca «conversando con …» */
+.marca {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 4px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--vidrio);
+  backdrop-filter: blur(8px);
+  color: var(--suave);
+  font-size: 12.5px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Barra: «Escríbele a…» y compositor */
+.barra {
+  position: absolute;
+  left: 12px;
+  bottom: calc(12px + var(--seguro) + var(--teclado));
+  z-index: 8;
+  width: min(300px, calc(100vw - 24px));
+}
+.barra[data-abierta] {
+  left: 50%;
+  width: min(560px, calc(100vw - 24px));
+  transform: translateX(-50%);
+}
+.barra-campo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--alto-control);
+  padding: 0 4px 0 14px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--vidrio-fuerte);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+}
+.barra-campo:focus-within {
+  border-color: var(--acento);
+}
+.barra input {
+  flex: 1;
+  min-width: 0;
+  height: var(--alto-control);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+}
+.barra input:focus-visible {
+  outline: none;
+}
+.barra input::placeholder {
+  color: var(--suave);
+}
+.barra input:disabled {
+  opacity: 1;
+}
+.barra-cuenta {
+  flex: none;
+  color: var(--suave);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.barra-boton {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--acento);
+  color: #0c1018;
+  cursor: pointer;
+}
+.barra-boton:disabled {
+  background: rgb(255 255 255 / 0.1);
+  color: var(--suave);
+  cursor: default;
+}
+.barra-aviso {
+  margin: 0 0 6px 14px;
+  padding: 6px 12px;
+  width: fit-content;
+  max-width: calc(100% - 14px);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: var(--vidrio-fuerte);
+  color: var(--texto);
+  font-size: 13.5px;
+}
+.barra-lista {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 9;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--vidrio-fuerte);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.45);
+}
+.barra-lista li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.barra-lista li span {
+  color: var(--suave);
+  font-size: 13px;
+}
+.barra-lista li[data-activa] {
+  background: var(--acento-fondo);
+}
+
+@media (max-width: 640px) {
+  .barra,
+  .barra[data-abierta] {
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: none;
+  }
+  .ayuda-teclas {
+    display: none;
+  }
+  .presencia {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .burbuja {
+    width: calc(100vw - 32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aviso,
+  .turno-pensando {
+    animation: none;
+  }
+}

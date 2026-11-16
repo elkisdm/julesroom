@@ -1,0 +1,18 @@
+.ev-carga-invitada {
+  z-index: 3;
+  top: 88px;
+  right: 24px;
+  max-width: min(390px, calc(100vw - 48px));
+  pointer-events: none;
+}
+@media (max-width: 720px) {
+  .ev-carga-invitada {
+    top: 240px;
+    right: 10px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
+.ev-carga-invitada h2 {
+  font-size: clamp(22px, 3vw, 28px);
+}

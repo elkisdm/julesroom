@@ -1,0 +1,238 @@
+.d5-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 35;
+}
+.d5-panel {
+  z-index: 3;
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  pointer-events: auto;
+}
+.d5-controles,
+.d5-fotos {
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(16px);
+}
+.d5-controles {
+  background: var(--tinta);
+  display: grid;
+  gap: 12px;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: min(340px, calc(100vw - 24px));
+  max-height: calc(100dvh - 164px);
+  overflow: auto;
+}
+.d5-controles h2,
+.d5-fotos h2 {
+  font: 500 20px/1.2 var(--display);
+}
+.d5-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.d5-controles fieldset {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 0;
+  min-width: 0;
+}
+.d5-controles legend,
+.d5-controles label {
+  color: var(--suave);
+  font-size: 13px;
+}
+.d5-controles input {
+  min-width: 0;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--vidrio2);
+}
+.d5-fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.d5-fila [aria-pressed='true'] {
+  background: var(--laton);
+  color: var(--tinta);
+}
+.d5-controles button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.d5-cuenta {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  text-shadow: 0 4px 24px var(--tinta);
+}
+.d5-cuenta small {
+  font: 500 clamp(20px, 3vw, 36px)/1.3 var(--display);
+}
+.d5-cuenta strong {
+  font: 500 clamp(120px, 20vw, 240px)/1.1 var(--display);
+  color: var(--laton2);
+  animation: d5-entrada 220ms var(--curva);
+}
+.d5-cuenta span {
+  color: var(--texto);
+}
+.d5-flash {
+  position: absolute;
+  inset: 0;
+  background: var(--texto);
+  animation: d5-destello 180ms ease-out forwards;
+}
+.d5-reloj {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  padding: 8px 20px;
+  border-radius: 12px;
+  background: var(--vidrio);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  max-width: min(400px, 45vw);
+}
+.d5-reloj span {
+  color: var(--suave);
+  overflow-wrap: anywhere;
+}
+.d5-reloj strong {
+  font: 500 28px/1.1 var(--display);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.d5-bienvenida {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, calc(100% - 32px));
+  text-align: center;
+  font: 500 clamp(28px, 4vw, 52px)/1.15 var(--display);
+  overflow-wrap: anywhere;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--vidrio);
+  animation: d5-entrada 220ms var(--curva);
+}
+.d5-fotos {
+  pointer-events: auto;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: min(440px, calc(100% - 24px));
+  max-height: calc(100dvh - 176px);
+  overflow: auto;
+  display: grid;
+  gap: 12px;
+}
+.d5-foto {
+  display: grid;
+  gap: 8px;
+}
+.d5-foto img {
+  display: block;
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--tinta);
+}
+.d5-foto a {
+  color: var(--texto);
+  text-decoration: none;
+}
+.d5-foto .d5-fila > span {
+  color: var(--suave);
+  margin-right: auto;
+  font-size: 13px;
+}
+.d5-aviso {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 12px 20px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  text-align: center;
+}
+@keyframes d5-destello {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes d5-entrada {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 600px) {
+  .d5-panel {
+    z-index: 3;
+    top: 72px;
+    right: 12px;
+  }
+  .d5-controles {
+    max-height: calc(100dvh - 144px);
+  }
+  .d5-reloj {
+    top: auto;
+    bottom: 100px;
+    left: auto;
+    right: 12px;
+    transform: none;
+    max-width: calc(100% - 24px);
+    flex-wrap: wrap;
+  }
+  .d5-bienvenida {
+    top: 156px;
+  }
+  .d5-fotos {
+    right: 12px;
+    bottom: 92px;
+  }
+  .d5-foto img {
+    max-height: 140px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d5-cuenta strong,
+  .d5-bienvenida {
+    animation: none;
+  }
+  .d5-flash {
+    display: none;
+  }
+}

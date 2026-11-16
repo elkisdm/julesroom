@@ -1,0 +1,179 @@
+.d3-raiz {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+}
+.d3-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.d3-ui button,
+.d3-panel,
+.d3-visor {
+  pointer-events: auto;
+}
+.d3-barra {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+}
+.d3-panel {
+  position: absolute;
+  right: 24px;
+  top: 88px;
+  width: 340px;
+  max-height: calc(100dvh - 172px);
+  overflow: auto;
+  padding: 20px;
+  background: var(--vidrio);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--linea);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: cr-entra var(--mov);
+}
+.d3-panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.d3-panel h2 {
+  font: 600 24px/1.1 var(--display);
+}
+.d3-panel p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--suave);
+}
+.d3-panel .d3-error {
+  color: var(--mal);
+}
+.d3-mover {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.d3-mover button {
+  flex: 1;
+  justify-content: center;
+}
+.d3-importar {
+  padding: 16px 0;
+  border-block: 1px solid var(--linea);
+  display: grid;
+  gap: 8px;
+}
+.d3-navegar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.d3-navegar output {
+  font: 500 20px var(--display);
+}
+.d3-texto summary {
+  cursor: pointer;
+  padding-block: 8px;
+  font-weight: 600;
+}
+.d3-texto label {
+  display: block;
+  margin: 12px 0 4px;
+  color: var(--suave);
+  font-size: 13px;
+}
+.d3-texto input,
+.d3-texto textarea {
+  width: 100%;
+  min-width: 0;
+  background: var(--vidrio2);
+  color: var(--texto);
+  font: 14px/1.5 var(--ui);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: 8px 12px;
+  resize: vertical;
+}
+.d3-texto button {
+  margin-top: 12px;
+}
+.d3-visor {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--tinta);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+}
+.d3-visor-controles {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.d3-visor-lamina {
+  width: 100%;
+  max-height: calc(100dvh - 160px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.d3-visor canvas {
+  display: block;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 16 / 9;
+}
+.d3-ui[data-viendo='true'] .d3-panel {
+  opacity: 0.12;
+  transition: opacity var(--mov);
+}
+.d3-ui[data-viendo='true'] .d3-panel:hover,
+.d3-ui[data-viendo='true'] .d3-panel:focus-within {
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .d3-barra {
+    bottom: 76px;
+    width: calc(100% - 24px);
+    justify-content: center;
+    gap: 4px;
+  }
+  .d3-barra .cr-boton {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .d3-panel {
+    top: 64px;
+    right: 12px;
+    width: min(340px, calc(100% - 24px));
+    max-height: calc(100dvh - 190px);
+    padding: 16px;
+    gap: 12px;
+  }
+  .d3-panel h2 {
+    font-size: 22px;
+  }
+  .d3-visor {
+    padding: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d3-panel {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,118 @@
+.ak-jules-ancla {
+  z-index: auto;
+  pointer-events: none;
+}
+.ak-jules-ancla:has(.ak-jules-menu) {
+  z-index: 35;
+}
+.ak-jules {
+  pointer-events: auto;
+  transform: translate(-50%, -100%);
+  max-width: min(290px, calc(100vw - 28px));
+}
+.ak-jules-nombre {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: var(--vidrio);
+  color: var(--texto);
+  padding: 7px 11px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ak-jules-nombre small {
+  opacity: 0.78;
+  font-size: 11px;
+}
+.ak-jules-menu {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--vidrio);
+  color: var(--texto);
+  box-shadow: 0 8px 30px #0003;
+  min-width: 190px;
+}
+.ak-jules-menu small {
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: center;
+}
+.ak-jules-cerrar {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 5px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+.ak-jules button:focus-visible {
+  outline: 2px solid var(--laton2);
+  outline-offset: 3px;
+}
+.ak-jules-burbuja {
+  display: block;
+  margin-top: 6px;
+  padding: 10px 13px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--vidrio);
+  color: var(--texto);
+  text-align: left;
+  max-width: 260px;
+  font-size: 13px;
+}
+.ak-sugerencias {
+  z-index: 40;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  background: var(--vidrio);
+  color: var(--texto);
+  max-height: min(320px, 42dvh);
+  overflow: auto;
+  box-shadow: 0 8px 25px #0003;
+}
+.ak-ayuda-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  color: var(--laton2);
+  font-size: 13px;
+}
+.ak-sugerencias p {
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+.ak-ayuda-detalle {
+  white-space: pre-line;
+  color: var(--suave);
+}
+.ak-ayuda-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cr .ak-ayuda-opciones button {
+  font-size: 12px;
+  white-space: normal;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .ak-sugerencias {
+    max-height: 31dvh;
+    padding: 10px;
+  }
+}

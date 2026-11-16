@@ -1,0 +1,112 @@
+.fl-nombre {
+  position: absolute;
+  inset: 0;
+  pointer-events: none !important;
+}
+.fl-nombre-panel {
+  pointer-events: auto;
+  right: var(--fl-espacio);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--fl-panel-ancho);
+}
+.fl-nombre-panel label {
+  display: block;
+  color: var(--suave);
+  margin-top: 12px;
+}
+.cr .fl-nombre-panel input {
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--laton);
+  padding: 16px 0 10px;
+  font: 700 36px var(--display);
+  caret-color: var(--laton2);
+}
+.fl-nombre-panel input::placeholder {
+  color: var(--suave);
+  opacity: 0.65;
+}
+.fl-ayuda {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  min-height: 54px;
+  padding-top: 10px;
+  color: var(--suave);
+  font-size: 12px;
+}
+.fl-ayuda small {
+  white-space: nowrap;
+  font-size: inherit;
+}
+@media (max-width: 720px) {
+  .fl-nombre-panel {
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    transform: none;
+  }
+  .cr .fl-nombre-panel input {
+    font-size: 30px;
+    padding-top: 12px;
+  }
+}
+
+/* Bienvenida compartida: este paso aún no conoce el nombre de la sala invitada. */
+.fl-nombre-panel::before {
+  content: 'Te damos la bienvenida a Jules Room';
+  display: block;
+  color: var(--laton2);
+  font: 600 16px/1.4 var(--display);
+  margin-bottom: 16px;
+}
+.cr--nombre .fl-nombre-panel {
+  background: var(--tinta);
+  max-height: calc(100dvh - 112px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding: 20px;
+}
+.cr--nombre .fl-nombre-panel input {
+  margin-top: 8px;
+}
+@media (max-height: 500px) {
+  .cr--nombre .fl-nombre-panel {
+    top: 80px;
+    bottom: auto;
+    transform: none;
+    width: min(390px, calc(100% - 24px));
+    left: auto;
+    right: 12px;
+    max-height: calc(100dvh - 92px);
+    padding: 16px 20px;
+  }
+  .fl-nombre-panel::before {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .cr--nombre .fl-nombre-panel h2 {
+    font-size: 28px;
+  }
+  .cr--nombre .fl-nombre-panel label {
+    margin-top: 8px;
+  }
+  .cr--nombre .fl-nombre-panel input {
+    font-size: 28px;
+    padding: 10px 0 6px;
+  }
+  .cr--nombre .fl-ayuda {
+    min-height: 40px;
+  }
+  .cr--nombre .fl-pasos button span {
+    display: none;
+  }
+  .cr--nombre .fl-pasos button[aria-current] span {
+    display: inline;
+  }
+}

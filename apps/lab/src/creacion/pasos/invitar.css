@@ -1,0 +1,64 @@
+.fl-invitar {
+  --fl-ancho: 440px;
+  left: 32px;
+  bottom: 32px;
+  width: min(var(--fl-ancho), calc(100% - 64px));
+}
+.cr .fl-invitar > p {
+  margin: 0 0 8px;
+}
+.cr .fl-invitar h2 {
+  margin-bottom: 28px;
+}
+.fl-invitar label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.fl-invitar label small {
+  color: var(--suave);
+  font-size: 12px;
+}
+.fl-enlace {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 6px;
+  background: var(--tinta);
+}
+.cr .fl-enlace input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px;
+  font-size: 13px;
+}
+.fl-enlace button {
+  flex: none;
+}
+.fl-copia {
+  display: block;
+  color: var(--suave);
+  font-size: 12px;
+  min-height: 56px;
+  padding: 10px 0;
+}
+@media (max-width: 720px) {
+  .fl-invitar {
+    left: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+  }
+  .cr .fl-invitar h2 {
+    margin-bottom: 20px;
+  }
+  .cr .fl-enlace input {
+    padding: 4px;
+    font-size: 12px;
+  }
+}

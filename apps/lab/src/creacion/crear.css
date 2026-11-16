@@ -1,0 +1,966 @@
+/* Crear tu sala · Jules Room. Capas de interfaz sobre la escena: vidrio oscuro, latón y tipografía grande. */
+.cr {
+  --tinta: #07080b;
+  --vidrio: rgba(14, 17, 24, 0.8);
+  --vidrio2: rgba(14, 17, 24, 0.58);
+  --borde: var(--linea);
+  --foco: var(--laton2);
+  --vidrio-fuerte: var(--vidrio);
+  --mov: 220ms var(--curva);
+  --linea: rgba(255, 255, 255, 0.14);
+  --texto: #f4efe6;
+  --suave: #b9b2a6;
+  --laton: #e9b949;
+  --laton2: #f6d27a;
+  --ok: #7fd88f;
+  --mal: #ff6b5e;
+  --aviso: #ffb347;
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --ui: 'Inter', system-ui, sans-serif;
+  --curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--tinta);
+  color: var(--texto);
+  font: 15px/1.4 var(--ui);
+  -webkit-font-smoothing: antialiased;
+}
+.cr *,
+.cr *::before,
+.cr *::after {
+  box-sizing: border-box;
+}
+.cr button,
+.cr input {
+  font: inherit;
+  color: inherit;
+}
+.cr button {
+  cursor: pointer;
+}
+.cr :focus-visible {
+  outline: 2px solid var(--laton2);
+  outline-offset: 3px;
+}
+.cr h1,
+.cr h2,
+.cr h3,
+.cr p,
+.cr ul {
+  margin: 0;
+}
+
+.cr-escena {
+  position: absolute;
+  inset: 0;
+  transition:
+    filter var(--fl-duracion) var(--fl-curva),
+    transform var(--fl-duracion) var(--fl-curva);
+}
+.cr-capa,
+.cr-dentro,
+.cr-construir {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cr-capa > *,
+.cr-dentro > *,
+.cr-construir > * {
+  pointer-events: auto;
+}
+.cr-capa {
+  animation: cr-entra var(--fl-duracion) var(--fl-curva);
+}
+@keyframes cr-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr-capa,
+  .cr-pista {
+    animation: none !important;
+  }
+  .cr-escena {
+    transition: none;
+  }
+}
+
+/* ——— piezas comunes ——— */
+.cr-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  border-radius: 12px;
+  padding: 0.8em 1.3em;
+  font-weight: 600;
+  border: 1px solid var(--linea);
+  background: var(--vidrio);
+  backdrop-filter: blur(10px);
+  transition:
+    transform 0.15s var(--curva),
+    background 0.2s;
+}
+.cr-boton:hover:not(:disabled) {
+  background: #1d2230;
+}
+.cr-boton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.cr-boton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.cr .cr-boton--prim {
+  background: var(--laton);
+  color: #1a1405;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(233, 185, 73, 0.32);
+}
+.cr-boton--prim:hover:not(:disabled) {
+  background: var(--laton2);
+}
+.cr-boton--chico {
+  padding: 0.5em 0.9em;
+  font-size: 14px;
+}
+.cr-tecla {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.8em;
+  height: 1.8em;
+  padding: 0 0.45em;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom-width: 3px;
+  font: 600 12px var(--ui);
+  color: var(--texto);
+}
+.cr-boton--prim .cr-tecla {
+  background: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.25);
+  color: #1a1405;
+}
+.cr-icono {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-grid;
+  place-items: center;
+  background: #1d2230;
+  border: 1px solid var(--linea);
+  font-size: 17px;
+}
+.cr-icono:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.cr-icono[aria-pressed='true'] {
+  color: var(--laton2);
+}
+.cr-fila {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cr-fila--fin {
+  justify-content: space-between;
+}
+.cr-esquina-sup {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.cr-ancla {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.cr-ancla > * {
+  pointer-events: auto;
+}
+
+.cr-pestanas,
+.cr-categorias {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.cr-pestanas button,
+.cr-categorias button {
+  background: none;
+  border: 0;
+  padding: 7px 11px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--suave);
+}
+.cr-pestanas button[aria-selected='true'],
+.cr-categorias button[aria-selected='true'] {
+  background: #262b38;
+  color: var(--texto);
+}
+
+/* ——— dentro ——— */
+.cr-chip-sala {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  background: var(--vidrio2);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+.cr-chip-sala small {
+  color: var(--suave);
+  font-weight: 400;
+  margin-left: 8px;
+}
+.cr-pista-ancla {
+  margin-left: 0;
+}
+.cr-pista {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+  animation: cr-flota 2.4s ease-in-out infinite;
+  white-space: nowrap;
+}
+.cr-pista .cr-tecla {
+  min-width: 2.2em;
+  height: 2.2em;
+  font-size: 13px;
+  background: rgba(15, 18, 24, 0.75);
+}
+.cr-pista small {
+  margin-left: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  text-shadow: 0 1px 3px #000;
+}
+@keyframes cr-flota {
+  50% {
+    transform: translate(-50%, -112%);
+  }
+}
+.cr-misiones {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  list-style: none;
+  padding: 12px 16px;
+  background: var(--vidrio2);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  min-width: 220px;
+}
+.cr-misiones li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+  color: var(--suave);
+  font-size: 14px;
+}
+.cr-misiones li::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--suave);
+  flex: none;
+}
+.cr-misiones li.cr-misiones-titulo {
+  font: 700 14px var(--display);
+  color: var(--laton2);
+  margin-bottom: 8px;
+}
+.cr-misiones li.cr-misiones-titulo::before {
+  display: none;
+}
+.cr-misiones li.ahora {
+  color: var(--texto);
+  font-weight: 600;
+}
+.cr-misiones li.ahora::before {
+  border-color: var(--laton2);
+}
+.cr-misiones li.hecha {
+  color: var(--texto);
+}
+.cr-misiones li.hecha::before {
+  content: '✓';
+  border: 0;
+  color: var(--ok);
+  font-weight: 700;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+.cr-burbuja {
+  transform: translate(-50%, calc(-100% - 18px));
+  background: #f4efe6;
+  color: #14161c;
+  border-radius: 16px 16px 16px 4px;
+  padding: 12px 14px;
+  width: max-content;
+  max-width: min(320px, 80vw);
+  font-size: 14px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+.cr-burbuja small {
+  display: block;
+  color: #6c6457;
+  font-size: 11px;
+  margin-top: 6px;
+}
+.cr-burbuja-tuyo {
+  color: #6c6457;
+  border-bottom: 1px solid #ddd3c2;
+  padding-bottom: 6px;
+  margin-bottom: 6px !important;
+}
+.cr-hablar {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  width: min(560px, calc(100% - 40px));
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  padding: 6px;
+  backdrop-filter: blur(12px);
+}
+.cr-hablar input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  padding: 8px 10px;
+  outline: none;
+}
+.cr-palanca,
+.cr-botones-tactiles {
+  display: none;
+}
+
+/* ——— construir ——— */
+.cr--construyendo .cr-escena {
+  filter: saturate(0.9);
+}
+.cr-barra {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  padding: 6px 6px 6px 16px;
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+}
+.cr-barra-titulo {
+  font: 700 17px var(--display);
+}
+.cr-guardado {
+  color: var(--suave);
+  font-size: 13px;
+  margin-right: 6px;
+}
+.cr-guardado--sin-guardar {
+  color: var(--aviso);
+}
+.cr-menu {
+  position: relative;
+}
+.cr-menu-lista {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 220px;
+  background: #121620;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+.cr-menu-lista > button {
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 9px 10px;
+  border-radius: 8px;
+}
+.cr-menu-lista > button:hover {
+  background: #1d2230;
+}
+.cr-errores {
+  color: #ffd6d1;
+  font-size: 13px;
+  padding: 8px 10px;
+}
+.cr-errores ul {
+  padding-left: 16px;
+}
+.cr-consejo {
+  transform: translate(-50%, 14px);
+  background: var(--vidrio);
+  border: 1px solid var(--ok);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.cr-consejo--choca,
+.cr-consejo--fuera {
+  border-color: var(--mal);
+  color: #ffd6d1;
+}
+.cr-consejo--bloquea {
+  border-color: var(--aviso);
+  color: #ffe4bf;
+}
+.cr-herramientas {
+  transform: translate(-50%, -100%);
+  display: flex;
+  gap: 2px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 4px;
+  backdrop-filter: blur(10px);
+}
+.cr-herramientas button {
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.cr-herramientas button:hover {
+  background: #262b38;
+}
+.cr-quitar {
+  color: #ffb4ab;
+}
+.cr-toast {
+  position: absolute;
+  left: 50%;
+  top: 74px;
+  transform: translateX(-50%);
+  background: #2a1714;
+  border: 1px solid var(--mal);
+  color: #ffd6d1;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  animation: cr-entra 0.25s var(--curva);
+}
+.cr-muelle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1040px, calc(100% - 40px));
+  bottom: 20px;
+  background: var(--vidrio);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  padding: 10px 12px 12px;
+}
+.cr-pestanas {
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.cr-pestanas button {
+  white-space: nowrap;
+}
+.cr-limite {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--suave);
+  white-space: nowrap;
+  padding-left: 12px;
+}
+.cr-estilo-construir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 4px;
+}
+.cr-estilo-construir > span {
+  color: var(--suave);
+}
+.cr-categorias {
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  border-top: 1px solid var(--linea);
+  padding-top: 8px;
+}
+.cr-categorias button {
+  white-space: nowrap;
+}
+.cr-items,
+.cr-lista {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+.cr-item,
+.cr-lista button {
+  flex: 0 0 104px;
+  border-radius: 12px;
+  background: #151a25;
+  border: 1px solid var(--linea);
+  padding: 6px 6px 8px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--suave);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: border-color 0.15s;
+}
+.cr-item svg,
+.cr-lista svg {
+  width: 64px;
+  height: 64px;
+}
+.cr-item[aria-pressed='true'],
+.cr-lista button[aria-pressed='true'] {
+  border-color: var(--laton);
+  color: var(--texto);
+  background: #1f2433;
+}
+.cr-vacio {
+  color: var(--suave);
+  padding: 18px 6px;
+}
+.cr-dos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.cr-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+.cr-opciones button {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.cr-opciones button small {
+  color: var(--suave);
+}
+.cr-opciones button[aria-selected='true'],
+.cr-opciones button[aria-checked='true'] {
+  background: #262b38;
+  color: var(--texto);
+  font-weight: 600;
+}
+.cr-opciones button[aria-checked='true']::after {
+  content: '✓';
+  color: var(--laton2);
+}
+.cr-puestos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 190px;
+  overflow-y: auto;
+}
+.cr-puesto {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.cr-puesto b {
+  width: 80px;
+  flex: none;
+}
+
+/* ——— teléfono ——— */
+@media (max-width: 720px) {
+  .cr {
+    font-size: 14px;
+  }
+  .cr-esquina-sup {
+    right: 12px;
+    top: 12px;
+  }
+  .cr-chip-sala {
+    left: 12px;
+    top: 12px;
+  }
+  .cr-misiones {
+    left: 12px;
+    bottom: auto;
+    top: 60px;
+    min-width: 0;
+    padding: 8px 12px;
+  }
+  .cr-misiones li:not(.ahora):not(.hecha):not(.cr-misiones-titulo),
+  .cr-misiones li.hecha {
+    display: none;
+  }
+  .cr-palanca {
+    display: block;
+    position: absolute;
+    left: 18px;
+    bottom: 24px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(15, 18, 24, 0.35);
+    touch-action: none;
+  }
+  .cr-palanca span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin: -25px 0 0 -25px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .cr-botones-tactiles {
+    display: flex;
+    position: absolute;
+    right: 18px;
+    bottom: 40px;
+  }
+  .cr-botones-tactiles button {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(15, 18, 24, 0.55);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    touch-action: none;
+  }
+  .cr-hablar {
+    bottom: 160px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: none;
+  }
+  .cr-barra {
+    left: 10px;
+    right: 10px;
+    transform: none;
+    top: 10px;
+    padding-left: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .cr-guardado {
+    display: none;
+  }
+  .cr-barra-titulo {
+    flex: 1 0 100%;
+  }
+  .cr-barra .cr-icono {
+    width: 44px;
+    height: 44px;
+    flex: none;
+  }
+  .cr-barra > .cr-boton {
+    margin-left: auto;
+    min-height: 44px;
+  }
+  .cr-barra .cr-tecla {
+    display: none;
+  }
+  .cr-muelle {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    transform: none;
+    bottom: 8px;
+    padding: 8px;
+  }
+  .cr-pestanas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    gap: 4px;
+  }
+  .cr-pestanas button {
+    min-height: 44px;
+    min-width: 0;
+    padding: 6px 3px;
+    font-size: 12px;
+  }
+  .cr-limite {
+    display: none;
+  }
+  .cr-item,
+  .cr-lista button {
+    flex-basis: 84px;
+  }
+  .cr-item svg,
+  .cr-lista svg {
+    width: 52px;
+    height: 52px;
+  }
+  .cr-dos {
+    grid-template-columns: 1fr;
+  }
+  .cr-opciones {
+    max-height: 120px;
+  }
+  .cr-herramientas button {
+    padding: 8px;
+  }
+}
+
+/* El acceso por llave tiene prioridad sobre las capas del mundo mientras está abierto. */
+.cr--dentro:has(.ev-presencia form) .ev-presencia {
+  z-index: 12;
+  max-height: calc(100dvh - 112px);
+  background: var(--tinta);
+  overscroll-behavior: contain;
+  scroll-padding: 16px;
+}
+@media (max-height: 500px), (max-width: 600px) {
+  .cr--dentro:has(.ev-presencia form) .ev-presencia {
+    top: 72px;
+    bottom: auto;
+    left: auto;
+    right: 12px;
+    width: min(320px, calc(100% - 24px));
+    max-height: calc(100dvh - 88px);
+    overflow-y: auto;
+  }
+}
+
+/* Esquina superior izquierda dentro de la sala: «Mis salas» y el nombre de la sala lado a lado,
+   y en teléfono «Para empezar» debajo de «Mis salas», sin nada encima de nada. */
+.cr--dentro .cr-chip-sala {
+  left: 140px;
+  top: 20px;
+}
+@media (max-width: 720px) {
+  .cr--dentro .cr-chip-sala {
+    display: none;
+  }
+  .cr--dentro .cr-misiones {
+    top: 72px;
+  }
+}
+@media (max-width: 600px) {
+  /* «Reunir aquí / Sígueme» debajo del panel de personas, no encima. */
+  .cr--dentro .d2-controles {
+    top: 140px;
+  }
+}
+
+/* ——— Pila inferior dentro de la sala: una sola fila de controles, sin solapes y sin tapar al avatar.
+   Escritorio: chat al centro; a la derecha, reacciones (abajo) y acciones de pantalla (encima);
+   avisos contextuales («E sentarse») sobre el chat, nunca sobre botones. ——— */
+.cr--dentro {
+  --pila-chat: 76px;
+  --pila-aire: 12px;
+}
+.cr--dentro .d2-reacciones {
+  left: auto;
+  right: 20px;
+  bottom: 20px;
+  transform: none;
+  align-items: flex-end;
+}
+.cr--dentro .d2-reacciones .cr-boton:not(.d2-reaccionar) {
+  width: 44px;
+  min-height: 44px;
+}
+.cr--dentro .d2-reacciones .cr-boton > span {
+  font-size: 20px;
+}
+.cr--dentro .d2-reacciones .d2-reaccionar {
+  display: none;
+  width: auto;
+  padding: 8px 14px;
+}
+.cr--dentro .d3-barra {
+  left: auto;
+  right: 20px;
+  transform: none;
+  bottom: calc(20px + var(--pila-chat) + var(--pila-aire));
+}
+.cr.cr--dentro .esc-accion {
+  bottom: calc(20px + var(--pila-chat) + var(--pila-aire));
+}
+.cr--dentro .ev-hablar {
+  width: min(560px, calc(100% - 560px));
+}
+@media (max-width: 1180px) {
+  /* Sin ancho para las cinco: se pliegan tras «Reaccionar» (las teclas 1–5 siguen activas). */
+  .cr--dentro .d2-reacciones .d2-reaccionar {
+    display: inline-flex;
+  }
+  .cr--dentro .d2-reacciones[data-abierto='false'] > .cr-boton:not(.d2-reaccionar) {
+    display: none;
+  }
+  .cr--dentro .d2-reacciones[data-abierto='true'] {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 252px;
+  }
+  .cr--dentro .ev-hablar {
+    width: min(560px, calc(100% - 2 * 270px));
+  }
+}
+@media (max-width: 720px) {
+  /* Teléfono: abajo solo el chat (o su botón) a todo el ancho; palanca y «Saltar» encima de él;
+     reacciones plegadas y acciones de pantalla en la columna derecha, bajo «Reunir aquí»;
+     el aviso contextual sobre la palanca. Nada tapa el centro donde está el avatar. */
+  .cr--dentro .ev-abrir-chat {
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: none;
+    bottom: 12px;
+  }
+  .cr--dentro .ev-hablar {
+    width: calc(100% - 24px);
+    bottom: 12px;
+  }
+  .cr--dentro .ev-hablar[data-abierto='true'] ~ .ev-abrir-chat,
+  .cr--dentro .ev-abrir-chat[aria-expanded='true'] {
+    bottom: 84px;
+    left: auto;
+    right: 12px;
+  }
+  .cr--dentro .cr-palanca {
+    bottom: 68px;
+  }
+  .cr--dentro .cr-botones-tactiles {
+    bottom: 84px;
+  }
+  .cr--dentro .d2-reacciones {
+    top: 196px;
+    bottom: auto;
+    right: 12px;
+  }
+  .cr--dentro .d2-reacciones[data-abierto='true'] {
+    max-width: 156px;
+  }
+  .cr--dentro .d3-barra {
+    top: 248px;
+    bottom: auto;
+    right: 12px;
+    left: auto;
+    width: auto;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .cr--dentro .d2-panel-voto {
+    width: calc(100vw - 24px - 136px);
+  }
+  .cr.cr--dentro .esc-accion {
+    bottom: 204px;
+  }
+}
+/* El panel del anfitrión se abre por encima de los controles de grupo (se puede tocar entero). */
+.cr--dentro .d3-raiz {
+  z-index: 11;
+}
+@media (max-width: 720px) {
+  .cr--dentro .ev-presencia:not(:has(form)) {
+    max-height: 72px;
+    overflow: auto;
+  }
+  /* Chat abierto (teclado en pantalla): solo el chat y su botón; el resto se aparta hasta cerrarlo. */
+  .cr--dentro:has(.ev-hablar[data-abierto='true'])
+    :is(
+      .cr-palanca,
+      .cr-botones-tactiles,
+      .d2-reacciones,
+      .d3-barra,
+      .cr-misiones,
+      .esc-accion,
+      .d2-panel-voto,
+      .d2-controles
+    ) {
+    display: none;
+  }
+  .cr--dentro:has(.ev-hablar[data-abierto='true']) .ev-abrir-chat {
+    bottom: 96px;
+    left: auto;
+    right: 12px;
+  }
+}
+@media (max-width: 360px) {
+  .cr--dentro .ev-presencia {
+    width: calc(100vw - 24px - 164px);
+  }
+  .cr--dentro .d2-controles {
+    top: 156px;
+  }
+  .cr--dentro .d2-panel-voto {
+    top: 212px;
+  }
+  .cr--dentro .d2-reacciones {
+    top: 212px;
+  }
+  .cr--dentro .d3-barra {
+    top: 264px;
+  }
+}
+
+/* La sala nunca se desplaza en horizontal: burbujas o paneles anclados fuera del borde no la corren. */
+html,
+body {
+  overflow-x: clip;
+}

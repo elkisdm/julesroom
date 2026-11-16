@@ -1,0 +1,100 @@
+.pv-colecciones {
+  margin-bottom: 12px;
+}
+.pv-colecciones > button {
+  width: 100%;
+  justify-content: space-between;
+}
+.pv-buscar {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--suave);
+  margin: 8px 0;
+}
+.pv-buscar input,
+.cr-buscar-catalogo input {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--vidrio2);
+  color: var(--texto);
+  font: inherit;
+}
+.pv-filtros {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.pv-filtros button {
+  background: var(--vidrio2);
+  border: 1px solid var(--linea);
+  font: inherit;
+  flex: none;
+  min-height: 44px;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--suave);
+}
+.pv-filtros button[aria-pressed='true'] {
+  background: var(--texto);
+  color: var(--tinta);
+}
+.pv-conjunto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  background: var(--vidrio2);
+  min-height: 100px;
+  padding: 4px;
+  font-size: 12px;
+}
+.pv-conjunto img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+}
+.cr-buscar-catalogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 6px 0;
+  color: var(--suave);
+}
+.cr-buscar-catalogo input {
+  width: 220px;
+  max-width: 65vw;
+}
+/* En pantalla pequeña, la colección ocupa la región de opciones completa.
+   Cerrar «Conjuntos» devuelve los controles de personalización individual. */
+@media (max-width: 720px) {
+  .pv-panel:has(.pv-colecciones > button[aria-expanded='true']) .pv-cabecera,
+  .pv-panel:has(.pv-colecciones > button[aria-expanded='true']) .pv-categorias,
+  .pv-panel:has(.pv-colecciones > button[aria-expanded='true']) .pv-eleccion,
+  .pv-panel:has(.pv-colecciones > button[aria-expanded='true']) .pv-acciones {
+    display: none;
+  }
+  .pv-conjunto img {
+    width: 64px;
+    height: 64px;
+  }
+  .pv-conjunto {
+    min-height: 88px;
+  }
+}
+@media (max-width: 720px) and (max-height: 680px) {
+  .pv-conjunto img {
+    width: 48px;
+    height: 48px;
+  }
+  .pv-conjunto {
+    min-height: 72px;
+  }
+}

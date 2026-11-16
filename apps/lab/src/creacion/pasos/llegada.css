@@ -1,0 +1,195 @@
+/* La escena queda abierta a la derecha; el texto vive sobre una base de tinta estable. */
+.fl-llegada {
+  --entrada-ancho: 640px;
+  --entrada-alto-acciones: 196px;
+  --entrada-fundido: 600ms;
+  position: absolute;
+  inset: 0;
+  pointer-events: none !important;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 8, 11, 0.96),
+    rgba(7, 8, 11, 0.88) 44%,
+    rgba(7, 8, 11, 0.12) 76%
+  );
+}
+.fl-bienvenida {
+  position: absolute;
+  left: clamp(24px, 5vw, 80px);
+  top: 50%;
+  transform: translateY(-40%);
+  width: min(var(--entrada-ancho), calc(100% - 48px));
+  text-align: left;
+}
+.fl-bienvenida h1 {
+  font: 800 clamp(48px, 6vw, 84px)/1.04 var(--display);
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+.fl-bienvenida h1 span {
+  color: var(--laton);
+}
+.cr .fl-bienvenida p {
+  font-size: clamp(17px, 1.6vw, 22px);
+  color: var(--texto);
+  margin: 24px 0 36px;
+  max-width: 23em;
+  text-wrap: balance;
+}
+.fl-acciones-llegada {
+  min-height: var(--entrada-alto-acciones);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 16px;
+}
+.fl-acciones-llegada > * {
+  flex-shrink: 0;
+}
+.fl-bienvenida button {
+  pointer-events: auto;
+}
+.fl-acciones-llegada > .cr-boton {
+  min-width: 328px;
+  max-width: 100%;
+  min-height: 64px;
+  padding: 16px 24px;
+  font-size: 18px;
+  justify-content: space-between;
+  gap: 24px;
+  text-align: left;
+  transition:
+    opacity var(--entrada-fundido) var(--curva),
+    filter var(--entrada-fundido) var(--curva),
+    box-shadow var(--mov),
+    transform var(--mov);
+}
+.fl-acciones-llegada > .cr-boton > span:first-child {
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.cr .fl-acciones-llegada > .cr-boton:disabled {
+  opacity: 0.72;
+  filter: grayscale(1);
+  box-shadow: none;
+  cursor: wait;
+}
+.fl-acciones-llegada > .cr-boton:disabled .cr-tecla {
+  opacity: 0;
+}
+.fl-acciones-secundarias {
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+}
+.fl-acciones-secundarias .cr-boton {
+  min-height: 48px;
+  background: var(--tinta);
+  border-color: var(--suave);
+  color: var(--texto);
+  box-shadow: none;
+  padding: 12px 16px;
+}
+.fl-preparacion {
+  color: var(--suave);
+  font-size: 14px;
+  max-width: 34em;
+  min-height: 20px;
+}
+.cr--llegada .cr-capa {
+  animation: none;
+}
+.cr--llegada {
+  --entrada-fundido: 900ms;
+}
+.cr--llegada .cr-escena {
+  opacity: 0;
+  transition: opacity var(--entrada-fundido) var(--curva);
+}
+.cr--llegada .cr-escena--lista {
+  opacity: 1;
+}
+.cr-portada {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 5;
+}
+@media (max-width: 720px) {
+  .fl-llegada {
+    --entrada-alto-acciones: 204px;
+    background: linear-gradient(
+      0deg,
+      var(--tinta) 12%,
+      rgba(7, 8, 11, 0.97) 40%,
+      rgba(7, 8, 11, 0.86) 65%,
+      rgba(7, 8, 11, 0.12)
+    );
+  }
+  .fl-bienvenida {
+    left: 24px;
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    width: calc(100% - 48px);
+  }
+  .fl-bienvenida h1 {
+    font-size: clamp(44px, 12vw, 76px);
+  }
+  .cr .fl-bienvenida p {
+    margin: 20px 0 28px;
+    max-width: 21em;
+  }
+  .fl-acciones-llegada > .cr-boton {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
+    padding: 16px 20px;
+  }
+  .fl-acciones-secundarias {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fl-acciones-secundarias .cr-boton {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+@media (max-height: 500px) and (min-width: 721px) {
+  .fl-bienvenida {
+    top: 56px;
+    transform: none;
+  }
+  .fl-bienvenida h1 {
+    font-size: 48px;
+  }
+  .cr .fl-bienvenida p {
+    margin: 16px 0 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr--llegada .cr-escena,
+  .fl-acciones-llegada > .cr-boton {
+    transition: none;
+  }
+}
+
+.cr-aviso-guardado {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  width: fit-content;
+  max-width: calc(100% - 40px);
+  margin: auto !important;
+  padding: 12px 20px;
+  color: var(--mal);
+  background: var(--tinta);
+  border: 1px solid var(--mal);
+  border-radius: 12px;
+  z-index: 10;
+}

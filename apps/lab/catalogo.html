@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revisión de catálogo</title>
+    <style>
+      html,
+      body,
+      #raiz {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #171b22;
+        color: #fff;
+        font-family: system-ui;
+      }
+      canvas {
+        display: block;
+      }
+      #rotulo {
+        position: absolute;
+        left: 24px;
+        top: 20px;
+        pointer-events: none;
+        background: #14171de0;
+        padding: 12px 18px;
+        border-radius: 8px;
+      }
+      #rotulo small {
+        display: block;
+        color: #c4cbd4;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="raiz"></div>
+    <script type="module" src="/src/catalogo/main.tsx"></script>
+  </body>
+</html>

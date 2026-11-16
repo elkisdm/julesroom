@@ -1,0 +1,299 @@
+/* Vestidor: los tokens y botones pertenecen a crear.css. */
+.pv {
+  position: absolute;
+  inset: 0;
+  pointer-events: none !important;
+  --pv-panel: 390px;
+  --pv-espacio: 24px;
+  --pv-toque: 44px;
+  --pv-miniatura: 76px;
+}
+.pv-girar {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+}
+.pv-girar:active {
+  cursor: grabbing;
+}
+.pv-giro-pista {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  color: var(--suave);
+  font-size: 13px;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--vidrio);
+}
+.pv-nombre {
+  display: block;
+  transform: translate(-50%, -100%);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--vidrio);
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 14px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid var(--linea);
+}
+.pv-panel {
+  pointer-events: auto;
+  position: absolute;
+  right: var(--pv-espacio);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--pv-panel);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--vidrio);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  max-height: calc(100% - 150px);
+  box-shadow: 0 24px 70px var(--tinta);
+}
+.pv .pv-panel:focus,
+.pv .pv-panel:focus-visible {
+  outline: none;
+}
+.pv-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pv-cabecera p {
+  color: var(--suave);
+  font-size: 13px;
+}
+.pv-cabecera h2 {
+  font: 800 36px/1.1 var(--display);
+  letter-spacing: -0.035em;
+  margin-top: 4px;
+}
+.pv-cuenta {
+  font-size: 12px;
+  color: var(--suave);
+}
+.pv-categorias {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  flex: none;
+  scrollbar-width: thin;
+  padding: 4px 2px 8px;
+  border-bottom: 1px solid var(--linea);
+}
+.pv-categorias button {
+  border: 0;
+  background: transparent;
+  border-radius: 9px;
+  color: var(--suave);
+  min-height: var(--pv-toque);
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+.pv-categorias button[aria-selected='true'] {
+  background: var(--texto);
+  color: var(--tinta);
+  font-weight: 700;
+}
+.pv-eleccion {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.pv-eleccion h3 {
+  font: 700 18px var(--display);
+}
+.pv-eleccion > span {
+  color: var(--suave);
+  font-size: 13px;
+}
+.pv-opciones {
+  min-height: 0;
+  overflow: auto;
+  padding: 3px;
+  margin: -3px;
+}
+.pv-rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.pv-opcion {
+  position: relative;
+  padding: 0;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--vidrio2);
+  min-height: var(--pv-toque);
+  height: 96px;
+  overflow: hidden;
+  transition:
+    background 160ms var(--curva),
+    transform 160ms var(--curva);
+}
+.pv-opcion:hover {
+  background: var(--vidrio);
+  transform: translateY(-2px);
+}
+.pv-opcion[aria-pressed='true'] {
+  background: var(--laton);
+  border: 2px solid var(--laton2);
+}
+.pv-opcion img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.pv-elegida {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: var(--laton2);
+  font-size: 12px;
+}
+.pv-color {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.pv-rejilla--colores {
+  grid-template-columns: repeat(5, 1fr);
+}
+.pv-rejilla--colores .pv-opcion {
+  height: 52px;
+  padding: 5px;
+}
+.pv-acciones {
+  display: flex;
+  gap: 8px;
+}
+.pv-acciones .cr-boton {
+  min-height: var(--pv-toque);
+  padding: 10px 12px;
+  flex: 1;
+  justify-content: center;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.pv-pie {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--linea);
+  padding-top: 16px;
+}
+.pv-pie .cr-boton {
+  flex: 1;
+  justify-content: space-between;
+  min-height: var(--pv-toque);
+}
+.pv-volver {
+  background: transparent;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  min-width: var(--pv-toque);
+}
+.pv-teclado {
+  color: var(--suave);
+  font-size: 11px;
+  text-align: center;
+}
+.pv-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+@media (max-width: 720px) {
+  .pv {
+    --pv-espacio: 10px;
+  }
+  .pv-panel {
+    left: var(--pv-espacio);
+    right: var(--pv-espacio);
+    top: auto;
+    bottom: 8px;
+    transform: none;
+    width: auto;
+    height: 330px;
+    max-height: none;
+    border-radius: 16px;
+    padding: 12px;
+    gap: 7px;
+  }
+  .pv-cabecera p,
+  .pv-teclado,
+  .pv-giro-pista {
+    display: none;
+  }
+  .pv-cabecera h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  .pv-categorias {
+    padding-bottom: 4px;
+  }
+  .pv-categorias button {
+    padding: 8px 12px;
+  }
+  .pv-eleccion h3 {
+    font-size: 14px;
+  }
+  .pv-eleccion > span {
+    font-size: 12px;
+  }
+  .pv-rejilla {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .pv-opcion {
+    height: var(--pv-miniatura);
+    border-radius: 8px;
+  }
+  .pv-opciones {
+    flex: 1;
+    min-height: var(--pv-miniatura);
+  }
+  .pv-rejilla--colores {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .pv-rejilla--colores .pv-opcion {
+    height: 44px;
+    padding: 3px;
+  }
+  .pv-acciones .cr-boton {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .pv-pie {
+    padding-top: 7px;
+  }
+  .pv-pie .cr-boton {
+    padding: 8px 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pv-opcion {
+    transition: none;
+  }
+}

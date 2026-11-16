@@ -1,0 +1,135 @@
+:root {
+  --fondo: #0f1216;
+  --panel: #171b21;
+  --borde: #2a313b;
+  --texto: #e6e9ee;
+  --suave: #9aa4b2;
+  --acento: #6aa9ff;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --fondo: #f3f5f8;
+    --panel: #ffffff;
+    --borde: #d6dce5;
+    --texto: #1b222c;
+    --suave: #5b6675;
+    --acento: #1d5fd6;
+  }
+}
+html,
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font:
+    14px/1.4 system-ui,
+    sans-serif;
+}
+.mov {
+  position: fixed;
+  inset: 0;
+}
+.mov-escena {
+  position: absolute;
+  inset: 0;
+}
+.mov-boton-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+}
+.mov-panel {
+  position: absolute;
+  top: 48px;
+  right: 12px;
+  bottom: 12px;
+  width: min(380px, calc(100vw - 24px));
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  z-index: 2;
+  background: var(--panel);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+.mov-panel h1 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+.mov-panel h2 {
+  font-size: 13px;
+  margin: 14px 0 6px;
+  color: var(--suave);
+  font-weight: 600;
+}
+.mov-ayuda {
+  margin: 4px 0;
+  color: var(--suave);
+}
+.mov-fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 4px 0;
+}
+.mov-fila > span {
+  color: var(--suave);
+}
+.mov-panel button,
+.mov-boton-panel {
+  background: var(--fondo);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.mov-panel button.activo {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+.mov-check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 5px 0;
+}
+.mov-check small {
+  display: block;
+  color: var(--suave);
+}
+.mov-rango {
+  display: block;
+  margin: 6px 0;
+}
+.mov-rango input {
+  width: 100%;
+}
+.mov-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+.mov-tabla th,
+.mov-tabla td {
+  text-align: right;
+  padding: 2px 6px;
+  border-bottom: 1px solid var(--borde);
+}
+.mov-tabla th:first-child,
+.mov-tabla td:first-child {
+  text-align: left;
+}
+@media (max-width: 520px) {
+  .mov-panel {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-height: 55vh;
+    bottom: 12px;
+  }
+}

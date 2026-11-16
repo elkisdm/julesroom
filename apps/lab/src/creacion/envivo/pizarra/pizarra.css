@@ -1,0 +1,284 @@
+.d8-raiz {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 45;
+}
+.d8-controles {
+  position: absolute;
+  top: 84px;
+  left: 24px;
+  pointer-events: auto;
+}
+.d8-abrir {
+  box-shadow: 0 8px 30px #0005;
+}
+.d8-abrir span {
+  color: var(--laton);
+}
+.d8-panel {
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 155px);
+  overflow-y: auto;
+  margin-top: 10px;
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  padding: 20px;
+  background: #0e1118f5;
+  box-shadow: 0 18px 70px #0007;
+  scrollbar-width: thin;
+}
+.d8-panel header {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.d8-panel h2 {
+  font: 600 25px/1.1 var(--display);
+}
+.d8-panel p {
+  color: var(--suave);
+  font-size: 13px;
+  margin: 8px 0;
+}
+.d8-icono {
+  background: none;
+  border: 1px solid var(--linea);
+  border-radius: 9px;
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 22px !important;
+}
+.d8-icono:disabled,
+.d8-enlace:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.d8-fila {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.d8-fila .cr-boton {
+  padding: 9px 12px;
+  font-size: 13px;
+}
+.d8-enlace {
+  border: 0;
+  background: none;
+  color: var(--laton2) !important;
+  padding: 8px;
+  font-size: 13px !important;
+}
+.d8-lamina {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  margin: 16px 0;
+  border: 1px solid var(--linea);
+}
+.d8-intenciones {
+  display: flex;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--tinta);
+  gap: 4px;
+}
+.d8-intenciones button {
+  flex: 1;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+.d8-intenciones button[aria-pressed='true'] {
+  background: #303541;
+  font-weight: 700;
+}
+.d8-intenciones small {
+  display: block;
+  color: var(--suave);
+  font-size: 11px;
+}
+.d8-etiqueta {
+  display: block;
+  margin: 14px 0 7px;
+  font-size: 13px;
+  color: var(--suave);
+}
+.d8-panel textarea,
+.d8-panel input {
+  background: var(--tinta);
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--texto);
+  font: inherit;
+  min-width: 0;
+}
+.d8-panel textarea {
+  width: 100%;
+  min-height: 84px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+.d8-panel input {
+  flex: 1;
+  width: 120px;
+}
+.d8-fila button[aria-pressed='true'] {
+  background: var(--laton);
+  color: var(--tinta);
+}
+.d8-historial {
+  margin: 16px 0;
+  justify-content: space-between;
+}
+.d8-historial span {
+  font-size: 12px;
+  color: var(--suave);
+}
+.d8-puente {
+  border-top: 1px solid var(--linea);
+  padding-top: 12px;
+  font-size: 12px;
+}
+.d8-configuracion {
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  color: var(--suave);
+}
+.d8-puente code {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: var(--laton2);
+  padding: 10px;
+  background: var(--tinta);
+  border-radius: 8px;
+}
+.d8-panel .d8-aviso,
+.d8-panel .d8-subtitulo {
+  color: var(--laton2);
+}
+.d8-grande {
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  background: var(--tinta);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.d8-grande header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: auto;
+}
+.d8-grande header span {
+  font-family: var(--display);
+  font-size: 20px;
+}
+.d8-lamina--grande {
+  width: min(100%, calc((100dvh - 150px) * 16 / 9));
+  max-height: calc(100dvh - 150px);
+  object-fit: contain;
+  border: 0;
+  margin: auto 0;
+}
+.d8-grande > p {
+  color: var(--suave);
+  font-size: 13px;
+  margin-top: auto;
+}
+@media (max-width: 600px) {
+  .d8-controles {
+    top: 68px;
+    left: 12px;
+  }
+  .d8-panel {
+    width: 366px;
+    padding: 16px;
+    max-height: calc(100dvh - 144px);
+  }
+  .d8-panel h2 {
+    font-size: 22px;
+  }
+  .d8-grande {
+    padding: 12px;
+  }
+  .d8-grande header {
+    align-items: start;
+  }
+  .d8-grande header span {
+    font-size: 15px;
+  }
+  .d8-grande header button {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d8-panel *,
+  .d8-grande * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.d8-mirar {
+  margin-left: 8px;
+  font-size: 13px !important;
+  padding: 12px !important;
+}
+
+.cr:has(.d8-controles--mirando) .cr-pista-ancla {
+  visibility: hidden;
+}
+
+.d8-visor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.d8-zoom {
+  display: none;
+}
+@media (max-width: 600px) {
+  .d8-zoom {
+    display: block;
+    align-self: flex-start;
+    margin: 12px 0;
+    padding: 8px 12px;
+    font-size: 12px !important;
+  }
+  .d8-visor--zoom {
+    display: block;
+  }
+  .d8-visor--zoom .d8-lamina--grande {
+    width: 1000px;
+    min-width: 1000px;
+    max-height: none;
+    margin: 0;
+  }
+}

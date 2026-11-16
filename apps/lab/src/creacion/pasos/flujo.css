@@ -1,0 +1,131 @@
+/* Composición compartida; identidad heredada de crear.css. */
+.fl-cabecera {
+  --fl-toque: 44px;
+  --fl-margen: 24px;
+  position: absolute;
+  top: var(--fl-margen);
+  left: var(--fl-margen);
+  right: 80px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 4;
+  pointer-events: none !important;
+}
+.fl-cabecera button {
+  pointer-events: auto;
+  min-height: var(--fl-toque);
+}
+.fl-pasos {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: var(--vidrio);
+  backdrop-filter: blur(12px);
+}
+.cr .fl-pasos button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  padding: 6px 12px;
+  color: var(--suave);
+  font-size: 13px;
+}
+.fl-pasos b {
+  color: var(--laton2);
+  font-weight: 500;
+}
+.cr .fl-pasos button[aria-current] {
+  background: var(--texto);
+  color: var(--tinta);
+  font-weight: 600;
+}
+.cr .fl-pasos button[aria-current] b {
+  color: inherit;
+}
+.cr .fl-pasos button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.fl-panel {
+  --fl-panel-ancho: 390px;
+  --fl-espacio: 24px;
+  --fl-radio: 20px;
+  position: absolute;
+  padding: var(--fl-espacio);
+  border: 1px solid var(--linea);
+  border-radius: var(--fl-radio);
+  background: var(--vidrio);
+  backdrop-filter: blur(18px);
+}
+.fl-panel h2 {
+  font: 800 clamp(28px, 3vw, 42px)/1.05 var(--display);
+  letter-spacing: -0.035em;
+}
+.cr .fl-panel p {
+  color: var(--suave);
+  margin-top: 8px;
+}
+.fl-panel > .cr-boton--prim {
+  width: 100%;
+  justify-content: space-between;
+}
+@media (max-width: 720px) {
+  .fl-cabecera {
+    --fl-margen: 10px;
+    right: 58px;
+    gap: 6px;
+  }
+  .fl-volver {
+    padding: 6px 12px;
+  }
+  .fl-volver span {
+    display: none;
+  }
+  .fl-pasos {
+    gap: 0;
+    padding: 2px;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .cr .fl-pasos button {
+    padding: 4px 7px;
+    gap: 4px;
+  }
+  .cr .fl-pasos button span {
+    display: none;
+  }
+  .cr .fl-pasos button[aria-current] span {
+    display: inline;
+  }
+  .fl-panel {
+    --fl-espacio: 18px;
+    --fl-radio: 18px;
+  }
+}
+@media (max-width: 350px) {
+  .fl-cabecera {
+    right: 50px;
+    gap: 4px;
+  }
+  .fl-volver {
+    padding: 4px 8px;
+  }
+  .cr .fl-pasos button {
+    padding: 4px 5px;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cr *,
+  .cr *::before,
+  .cr *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}

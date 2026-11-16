@@ -1,0 +1,35 @@
+# Configuración de LiveKit para Jules Room (autoalojado, una instancia).
+# Claves API: NO van aquí; se inyectan con LIVEKIT_KEYS en docker-compose.
+# Certificados TURN/TLS: LIVEKIT_TURN_CERT y LIVEKIT_TURN_KEY (Let's Encrypt).
+# Referencia: https://docs.livekit.io/transport/self-hosting/deployment/
+
+port: 7880
+log_level: info
+
+rtc:
+  tcp_port: 7881
+  # Un solo puerto UDP multiplexado (alternativa al rango 50000–60000).
+  udp_port: 7882
+  use_external_ip: true
+  allow_tcp_fallback: true
+
+redis:
+  # Puerto dedicado para no chocar con Redis de otros stacks en el mismo VPS.
+  address: 127.0.0.1:6380
+
+turn:
+  enabled: true
+  # Debe coincidir con el certificado TLS de TURN (mismo FQDN o subdominio TURN).
+  # Sustituye al desplegar; ver docs/despliegue/vivo-vps.md.
+  domain: turn.dominio-vivo.ejemplo
+  udp_port: 3478
+  # 5349 evita competir con Traefik/Coolify en 443.
+  tls_port: 5349
+
+# Métricas Prometheus en loopback (no exponer a internet).
+prometheus_port: 6789
+
+room:
+  # Tope por defecto del servidor; el emisor de tokens también fija maxParticipants.
+  max_participants: 25
+  empty_timeout: 300

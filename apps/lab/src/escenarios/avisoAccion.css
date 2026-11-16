@@ -1,0 +1,62 @@
+.esc-accion {
+  position: absolute;
+  left: 50%;
+  bottom: 56px;
+  z-index: 5;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 10px;
+  border-radius: 999px;
+  background: var(--vidrio-fuerte);
+  border: 1px solid var(--borde);
+  color: var(--texto);
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  animation: esc-accion-entra var(--mov) both;
+}
+.esc-accion kbd {
+  font: inherit;
+  font-weight: 600;
+  min-width: 24px;
+  padding: 1px 6px;
+  text-align: center;
+  border: 1px solid var(--foco);
+  border-radius: 6px;
+  color: var(--foco);
+}
+.esc-accion-objeto {
+  color: var(--suave);
+}
+@keyframes esc-accion-entra {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+}
+
+.esc-accion--boton {
+  /* Por encima del panel (.pn, z 10): en el teléfono la hoja lo tapaba y no se podía tocar «cerrar». */
+  z-index: 11;
+  font-family: inherit;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  min-height: 44px;
+}
+@media (pointer: coarse) {
+  .esc-accion kbd {
+    display: none;
+  }
+  .cr .esc-accion {
+    bottom: 136px;
+    max-width: calc(100% - 24px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .esc-accion {
+    animation: none;
+  }
+}

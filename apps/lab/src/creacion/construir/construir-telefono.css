@@ -1,0 +1,56 @@
+/* Construir en teléfono: objetivos grandes, el texto cabe, el aviso no se sale. */
+.cr-acciones-fijas {
+  display: none;
+}
+@media (max-width: 720px) {
+  .cr-herramientas-mueble {
+    display: none;
+  }
+  .cr-consejo {
+    white-space: normal;
+    max-width: min(280px, calc(100vw - 24px));
+    text-align: center;
+  }
+  .cr-toast {
+    top: 108px;
+    max-width: calc(100vw - 24px);
+    text-align: center;
+  }
+  .cr-acciones-fijas {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cr-acciones-fijas button {
+    flex: 1;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--linea);
+    background: var(--vidrio);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 4px;
+    white-space: nowrap;
+  }
+  .cr-acciones-fijas .cr-quitar {
+    color: var(--mal);
+  }
+  .cr-lista button {
+    min-height: 44px;
+  }
+  .cr-lista button.cr-lista-mueble {
+    flex-basis: 148px;
+    justify-content: center;
+  }
+  .cr-lista-mueble small {
+    color: var(--suave);
+  }
+}
+.cr-lista-mueble small {
+  color: var(--suave);
+}
+.cr-menu-lista button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

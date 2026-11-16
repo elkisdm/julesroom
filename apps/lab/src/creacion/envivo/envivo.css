@@ -1,0 +1,468 @@
+.ev-presencia {
+  position: absolute;
+  left: 24px;
+  top: 88px;
+  width: 260px;
+  max-height: calc(100dvh - 240px);
+  overflow: auto;
+  padding: 12px 16px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  font-size: 13px;
+  pointer-events: auto;
+}
+.ev-presencia summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 4px 0;
+}
+.ev-presencia ul {
+  list-style: none;
+  padding: 8px 0;
+}
+.ev-presencia li {
+  padding: 4px 0;
+  animation: cr-entra var(--mov);
+}
+.ev-presencia label {
+  display: block;
+  color: var(--suave);
+  margin-top: 8px;
+}
+.ev-presencia input {
+  width: 100%;
+  padding: 8px;
+  background: var(--vidrio2);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+.ev-presencia > button {
+  margin-top: 8px;
+}
+.ev-presencia p {
+  color: var(--suave);
+  padding: 8px 0;
+}
+.ev-hablar {
+  flex-wrap: wrap;
+  max-width: calc(100vw - 32px);
+}
+.ev-hablar small {
+  flex-basis: 100%;
+  color: var(--suave);
+  font-size: 11px;
+}
+.ev-hablar input {
+  min-width: 0;
+}
+.ev-burbuja {
+  max-height: 220px;
+  overflow: auto;
+}
+.ev-burbuja strong {
+  display: block;
+  color: var(--laton2);
+  margin-bottom: 8px;
+}
+.ev-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+@media (max-width: 600px) {
+  .ev-presencia {
+    top: 72px;
+    left: 12px;
+    width: 210px;
+    padding: 8px 12px;
+    max-height: calc(100dvh - 360px);
+  }
+  .ev-hablar {
+    bottom: 94px;
+    width: calc(100vw - 24px);
+    padding: 8px;
+  }
+  .ev-hablar .cr-boton {
+    padding: 8px;
+  }
+  .ev-burbuja {
+    max-width: 270px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ev-presencia li {
+    animation: none;
+  }
+}
+.ev-burbuja strong {
+  color: var(--tinta);
+}
+@media (max-width: 600px) {
+  .ev-presencia {
+    top: 60px;
+    left: auto;
+    right: 12px;
+    width: 184px;
+  }
+  .cr--dentro .cr-misiones {
+    max-width: 158px;
+  }
+  .ev-hablar {
+    bottom: 160px;
+  }
+}
+.cr--dentro .esc-accion {
+  bottom: 108px;
+}
+@media (max-width: 600px) {
+  .cr--dentro .esc-accion {
+    bottom: 32px;
+    max-width: 190px;
+  }
+}
+/* En teléfono el chat se abre a pedido para dejar visible el avatar al entrar. */
+.ev-abrir-chat {
+  display: none;
+}
+@media (max-width: 600px) {
+  .ev-abrir-chat {
+    display: block;
+    bottom: 12px;
+    padding: 8px 12px;
+  }
+  .ev-hablar[data-abierto='false'] {
+    display: none;
+  }
+  .ev-hablar {
+    bottom: 64px;
+  }
+}
+
+.d2-anfitrion {
+  pointer-events: none;
+}
+.d2-anfitrion > span {
+  display: block;
+  transform: translate(-50%, -100%);
+  color: var(--laton2);
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.d2-mundo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.d2-mundo .cr-ancla > * {
+  pointer-events: none;
+}
+.d2-controles {
+  position: absolute;
+  top: 88px;
+  right: 20px;
+  max-width: 280px;
+  pointer-events: auto;
+}
+.d2-acciones {
+  display: flex;
+  gap: 8px;
+}
+.d2-controles p {
+  background: var(--vidrio);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 12px;
+}
+.d2-invitacion {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(360px, calc(100vw - 24px));
+  padding: 20px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  pointer-events: auto;
+}
+.d2-invitacion p {
+  margin: 8px 0 16px;
+  color: var(--suave);
+}
+.d2-invitacion button + button {
+  margin-left: 8px;
+}
+@media (max-width: 600px) {
+  .d2-controles {
+    top: 124px;
+    right: 12px;
+    max-width: calc(100vw - 24px);
+  }
+  .d2-acciones .cr-boton {
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+}
+.d2-reacciones {
+  position: absolute;
+  bottom: 106px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+.d2-reacciones .cr-boton {
+  width: 52px;
+  min-height: 52px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.d2-reacciones .cr-boton > span {
+  font-size: 24px;
+}
+.d2-reacciones kbd {
+  color: var(--suave);
+  font: 11px inherit;
+}
+.d2-reacciones button[aria-pressed='true'] {
+  background: var(--laton);
+  color: var(--tinta);
+}
+.d2-reaccion > span {
+  display: flex;
+  gap: 4px;
+  transform: translate(-50%, -100%);
+  font-size: 28px;
+  background: var(--vidrio);
+  border-radius: 8px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.d2-manos {
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background: var(--vidrio);
+  font-size: 13px;
+  max-height: 30vh;
+  overflow: auto;
+}
+.d2-manos ol {
+  padding-left: 24px;
+  margin-top: 8px;
+}
+.d2-manos li {
+  padding: 2px 0;
+}
+.d2-fiesta {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.d2-fiesta > span {
+  position: absolute;
+  top: -40px;
+  font-size: 20px;
+  opacity: 0;
+  animation: d2-aplauso 1.8s ease-out both;
+}
+@keyframes d2-aplauso {
+  15% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(35vh) rotate(25deg);
+    opacity: 0;
+  }
+}
+@media (max-width: 600px) {
+  .d2-reacciones {
+    bottom: 160px;
+    gap: 4px;
+  }
+  .d2-reacciones .cr-boton {
+    width: 48px;
+    min-height: 48px;
+  }
+  .d2-reacciones kbd {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d2-fiesta > span {
+    animation: none;
+  }
+}
+.d2-panel-voto {
+  position: absolute;
+  right: 20px;
+  top: 240px;
+  width: 280px;
+  max-height: calc(100dvh - 360px);
+  overflow: auto;
+  pointer-events: auto;
+  padding: 12px;
+  background: var(--vidrio);
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  font-size: 13px;
+}
+.d2-panel-voto summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.d2-panel-voto label {
+  display: block;
+  margin-top: 12px;
+  color: var(--suave);
+}
+.d2-panel-voto input {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  background: var(--vidrio2);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  color: var(--texto);
+}
+.d2-panel-voto form > button,
+.d2-panel-voto .d2-acciones {
+  margin-top: 12px;
+}
+.d2-panel-voto form > button + button {
+  margin-left: 8px;
+}
+.d2-panel-voto p {
+  margin-top: 8px;
+}
+.d2-pregunta {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 12px 16px;
+  background: var(--vidrio);
+  border-radius: 8px;
+  text-align: center;
+}
+.d2-pregunta strong,
+.d2-pregunta span {
+  display: block;
+}
+.d2-pregunta span {
+  color: var(--suave);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.d2-zona > div {
+  transform: translate(-50%, -100%);
+  background: var(--vidrio);
+  border: 2px solid var(--linea);
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 100px;
+  max-width: 160px;
+  overflow-wrap: anywhere;
+}
+.d2-zona strong,
+.d2-zona span {
+  display: block;
+}
+.d2-zona span {
+  font-size: 12px;
+  color: var(--suave);
+  margin-top: 4px;
+}
+.d2-zona-ganadora {
+  animation: d2-ganar 0.8s ease-out;
+}
+@keyframes d2-ganar {
+  40% {
+    transform: translate(-50%, -115%) scale(1.08);
+  }
+}
+@media (max-width: 600px) {
+  .d2-panel-voto {
+    right: 12px;
+    top: 184px;
+    width: min(280px, calc(100vw - 24px));
+    max-height: calc(100dvh - 370px);
+  }
+  .d2-pregunta {
+    top: 72px;
+    max-width: calc(100vw - 32px);
+  }
+  .d2-zona > div {
+    min-width: 80px;
+    max-width: 120px;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .d2-zona-ganadora {
+    animation: none;
+  }
+}
+/* El panel de escritura queda al lado opuesto de las manos levantadas. */
+.d2-panel-voto {
+  right: auto;
+  left: 24px;
+}
+.d2-pregunta > button {
+  margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .d2-panel-voto {
+    left: 12px;
+    right: auto;
+  }
+}
+.d2-aviso-grabacion {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--vidrio);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: center;
+}
+.d2-grabando .cr > :not(.cr-escena):not(.cr-dentro),
+.d2-grabando .cr-dentro > :not(.d2-mundo),
+.d2-grabando
+  .d2-mundo
+  > :not(.d2-anfitrion):not(.d2-reaccion):not(.d2-zona):not(.d2-fiesta):not(.d2-aviso-grabacion) {
+  display: none !important;
+}
+.d2-pregunta > button {
+  pointer-events: auto;
+}
+.d2-controles,
+.d2-reacciones {
+  z-index: 10;
+}
+.d2-panel-voto,
+.d2-pregunta {
+  z-index: 15;
+}
+.d2-invitacion {
+  z-index: 30;
+}

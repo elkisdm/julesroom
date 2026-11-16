@@ -1,0 +1,26 @@
+.pv-fundador {
+  padding: 8px 16px;
+  font-size: 12px;
+}
+.pv-fundador form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pv-fundador label {
+  width: 100%;
+}
+.pv-fundador input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--fondo);
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  padding: 8px;
+}
+.pv-fundador [role='status'] {
+  display: block;
+  margin-top: 4px;
+}
